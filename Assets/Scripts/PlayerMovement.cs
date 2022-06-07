@@ -56,9 +56,10 @@ public class PlayerMovement : MonoBehaviour
     rotatePoint.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
     GameObject gunImage = rotatePoint.transform.Find("Gun").gameObject;
-    if (rotatePoint.transform.rotation.z > 90)
+    if (rotatePoint.transform.rotation.z > 0.7 || rotatePoint.transform.rotation.z < -0.7)
     {
-      gunImage.transform.localScale = new Vector3(-1, 1, 1);
+
+      gunImage.transform.localScale = new Vector3(1, -1, 1);
     }
     else
     {
