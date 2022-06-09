@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
   Vector2 _MousePosition;
 
   Rigidbody2D _Rigidbody;
-  CapsuleCollider2D bodyCollider;
-  BoxCollider2D footCollider;
+  CapsuleCollider2D _BodyCollider;
+  BoxCollider2D _FootCollider;
 
   private void Awake()
   {
