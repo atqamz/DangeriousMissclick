@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class AirEnemy : MonoBehaviour
 {
-  [SerializeField] float _Speed = 5f;
-  Transform _Target;
-  Rigidbody2D _Rigidbody;
-  Vector2 _Direction;
+  [SerializeField] float enemySpeed = 5f;
+  [SerializeField] float enemyDamage = 1f;
+  Transform enemyTarget;
+  Rigidbody2D enemyRb;
+  Vector2 enemyDir;
 
   void Awake()
   {
-    _Rigidbody = GetComponent<Rigidbody2D>();
-    GameObject player = GameObject.Find("Antivirus");
-    _Target = player.transform;
+    enemyRb = GetComponent<Rigidbody2D>();
+    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    enemyTarget = player.transform;
   }
 
   void Start()
   {
-    if (transform.position.x > _Target.position.x)
+    if (transform.position.x > enemyTarget.position.x)
     {
       Flip();
     }
@@ -26,12 +27,12 @@ public class AirEnemy : MonoBehaviour
 
   void Update()
   {
-    Vector3 latestDir = _Target.position - transform.position;
+    Vector3 latestDir = enemyTarget.position - transform.position;
     float angle = Mathf.Atan2(latestDir.y, latestDir.x) * Mathf.Rad2Deg;
-    _Rigidbody.rotation = angle;
+    enemyRb.rotation = angle;
     latestDir.Normalize();
 
-    _Direction = latestDir;
+    enemyDir = latestDir;
   }
 
   void FixedUpdate()
@@ -39,9 +40,18 @@ public class AirEnemy : MonoBehaviour
     MoveCharacter();
   }
 
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.CompareTag("Player"))
+    {
+      other.GetComponent<Health>().TakeDamage(enemyDamage);
+      Destroy(gameObject);
+    }
+  }
+
   void MoveCharacter()
   {
-    _Rigidbody.MovePosition((Vector2)transform.position + (_Direction * _Speed * Time.fixedDeltaTime));
+    enemyRb.MovePosition((Vector2)transform.position + (enemyDir * enemySpeed * Time.fixedDeltaTime));
   }
 
   void Flip()

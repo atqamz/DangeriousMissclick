@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class GroundEnemy : MonoBehaviour
 {
-  [SerializeField] float _Speed = 5f;
-  [SerializeField] Transform _Target;
-  Rigidbody2D _Rigidbody;
+  [SerializeField] float enemySpeed = 5f;
+  [SerializeField] float enemyDamage = 1f;
+
+  Transform enemyTarget;
+  Rigidbody2D enemyRb;
 
   void Awake()
   {
-    _Rigidbody = GetComponent<Rigidbody2D>();
+    enemyRb = GetComponent<Rigidbody2D>();
+    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    enemyTarget = player.transform;
   }
   void Start()
   {
-    if (transform.position.x > _Target.position.x)
+    if (transform.position.x > enemyTarget.position.x)
     {
       Flip();
     }
@@ -25,14 +29,23 @@ public class GroundEnemy : MonoBehaviour
     MoveCharacter();
   }
 
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.CompareTag("Player"))
+    {
+      other.GetComponent<Health>().TakeDamage(enemyDamage);
+      Destroy(gameObject);
+    }
+  }
+
   void MoveCharacter()
   {
-    _Rigidbody.velocity = new Vector2(_Speed * Time.fixedDeltaTime, _Rigidbody.velocity.y);
+    enemyRb.velocity = new Vector2(enemySpeed * Time.fixedDeltaTime, enemyRb.velocity.y);
   }
 
   void Flip()
   {
     transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
-    _Speed *= -1;
+    enemySpeed *= -1;
   }
 }

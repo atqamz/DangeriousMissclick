@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4738852491384073541}
   m_Layer: 0
   m_Name: Phising
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a728c762270854080b3eb59b1d083a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Speed: 5
-  _Target: {fileID: 3194838657739753182, guid: 696f0bccf16c7874d8cee0c7a31bb54c, type: 3}
+  enemySpeed: 5
 --- !u!50 &4738852491384073547
 Rigidbody2D:
   serializedVersion: 4
