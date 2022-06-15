@@ -6,15 +6,19 @@ public class AirEnemy : MonoBehaviour
 {
   [SerializeField] float enemySpeed = 5f;
   [SerializeField] float enemyDamage = 1f;
+  [SerializeField] float enemyHealth = 15f;
   Transform enemyTarget;
   Rigidbody2D enemyRb;
   Vector2 enemyDir;
+
+  AudioPlayer audioPlayer;
 
   void Awake()
   {
     enemyRb = GetComponent<Rigidbody2D>();
     GameObject player = GameObject.FindGameObjectWithTag("Player");
     enemyTarget = player.transform;
+    audioPlayer = FindObjectOfType<AudioPlayer>();
   }
 
   void Start()
@@ -46,6 +50,15 @@ public class AirEnemy : MonoBehaviour
     {
       other.GetComponent<Health>().TakeDamage(enemyDamage);
       Destroy(gameObject);
+    }
+    else if (other.CompareTag("Bullet"))
+    {
+      enemyHealth -= other.GetComponent<Bullet>().bulletDamage;
+      audioPlayer.PlayHittingClip();
+      if (enemyHealth <= 0)
+      {
+        Destroy(gameObject);
+      }
     }
   }
 

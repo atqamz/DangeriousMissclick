@@ -7,6 +7,9 @@ TagManager:
   - Firewall
   - Enemy
   - Border
+  - Bullet
+  - EnemyBoss
+  - PopUp
   layers:
   - Default
   - TransparentFX

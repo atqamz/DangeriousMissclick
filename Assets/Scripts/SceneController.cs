@@ -6,12 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
   [SerializeField] float sceneLoadDelay = 1.5f;
-  //   ScoreKeeper scoreKeeper;
-
-  //   void Awake()
-  //   {
-  //     scoreKeeper = FindObjectOfType<ScoreKeeper>();
-  //   }
+  public bool[] levelUnlocked = { true, false, false };
 
   void Load(string sceneName)
   {
@@ -26,8 +21,10 @@ public class SceneController : MonoBehaviour
 
   public void LoadLevel(int level)
   {
-    // scoreKeeper.ResetScore();
-    Load("Level" + level);
+    if (levelUnlocked[level - 1])
+    {
+      Load("Level" + level);
+    }
   }
 
   public void LoadMainMenu()
@@ -35,9 +32,14 @@ public class SceneController : MonoBehaviour
     Load("MainMenu");
   }
 
-  public void LoadGameOver()
+  public void LoadGameWin()
   {
-    StartCoroutine(WaitAndLoad("GameOver", sceneLoadDelay));
+    StartCoroutine(WaitAndLoad("GameWin", sceneLoadDelay));
+  }
+
+  public void LoadGameLose()
+  {
+    StartCoroutine(WaitAndLoad("GameLose", sceneLoadDelay));
   }
 
   public void QuitGame()

@@ -7,7 +7,7 @@ public class PlayerShoot : MonoBehaviour
 {
   [SerializeField] GameObject bulletPrefab;
   [SerializeField] Transform bulletDir;
-
+  AudioPlayer audioPlayer;
   Camera mainCam;
 
   Vector2 playerMousePos;
@@ -18,6 +18,7 @@ public class PlayerShoot : MonoBehaviour
   void Awake()
   {
     mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+    audioPlayer = FindObjectOfType<AudioPlayer>();
   }
 
   void FixedUpdate()
@@ -38,6 +39,7 @@ public class PlayerShoot : MonoBehaviour
 
       GameObject instance = Instantiate(bulletPrefab, bulletDir.position, bulletDir.rotation, transform.parent);
       instance.SetActive(true);
+      audioPlayer.PlayShootingClip();
 
       StartCoroutine(CanShoot());
     }

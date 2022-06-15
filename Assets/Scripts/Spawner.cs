@@ -19,20 +19,33 @@ public class Spawner : MonoBehaviour
   [SerializeField] Transform[] spawnGroundPoint;
   [SerializeField] Transform[] spawnAirPoint;
 
+  SceneController sceneController;
+
   Wave currentWave;
   int curWaveIndex;
   bool canSpawn = true;
   float nextSpawnTime;
 
-  void Update()
+  void Awake()
+  {
+    sceneController = FindObjectOfType<SceneController>();
+  }
+
+  void FixedUpdate()
   {
     currentWave = spawnerWaves[curWaveIndex];
     SpawnWave();
 
     GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-    if (totalEnemies.Length == 0 && !canSpawn && curWaveIndex + 1 != spawnerWaves.Length)
+    GameObject[] totalEnemyBoss = GameObject.FindGameObjectsWithTag("EnemyBoss");
+
+    if (totalEnemies.Length == 0 && totalEnemyBoss.Length == 0 && !canSpawn && curWaveIndex + 1 != spawnerWaves.Length)
     {
       SpawnNextWave();
+    }
+    else if (totalEnemies.Length == 0 && totalEnemyBoss.Length == 0 && !canSpawn && curWaveIndex + 1 == spawnerWaves.Length)
+    {
+      sceneController.LoadGameWin();
     }
   }
 
@@ -55,7 +68,8 @@ public class Spawner : MonoBehaviour
       {
         SpawnWaveBoss();
       }
-      else if (currentWave.count == 0)
+
+      if (currentWave.count == 0)
       {
         canSpawn = false;
       }

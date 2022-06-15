@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpeed: 5
+  enemyDamage: 1
+  enemyHealth: 15
 --- !u!50 &4738852491384073547
 Rigidbody2D:
   serializedVersion: 4

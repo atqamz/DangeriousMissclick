@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
   [SerializeField] float bulletSpeed = 5f;
   [SerializeField] float bulletLifetime = 5f;
+  public float bulletDamage = 5f;
 
   IEnumerator DestroyBulletAfterTime()
   {
@@ -25,9 +26,9 @@ public class Bullet : MonoBehaviour
 
   void OnTriggerEnter2D(Collider2D other)
   {
-    if (other.gameObject.tag == "Enemy")
+    if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "EnemyBoss")
     {
-      Destroy(other.gameObject);
+      // Destroy(other.gameObject);
       Destroy(gameObject);
     }
   }
@@ -39,4 +40,5 @@ public class Bullet : MonoBehaviour
       Destroy(gameObject);
     }
   }
+
 }

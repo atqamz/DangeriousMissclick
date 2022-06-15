@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 2744214802163487478}
   - component: {fileID: 2744214802163487473}
   - component: {fileID: 2744214802163487472}
+  - component: {fileID: 1799529611556621491}
   m_Layer: 5
   m_Name: UIGame
   m_TagString: Untagged
@@ -257,6 +258,7 @@ RectTransform:
   m_Children:
   - {fileID: 2744214802123224810}
   - {fileID: 2744214803090980678}
+  - {fileID: 3995986479334809153}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -326,6 +328,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1799529611556621491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2744214802163487475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a352d6262672a7b46891ebdf5381bace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PopUpPrefab: {fileID: 5661171063315388169, guid: de8829a89cd37a94dbf1109ec7f467ab, type: 3}
+  popUpCount: 5
+  popUpDelay: 0.2
 --- !u!1 &2744214803090980673
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,3 +396,38 @@ MonoBehaviour:
   playerHealth: {fileID: 0}
   totalHealthbarImage: {fileID: 2744214802012144929}
   currentHealthbarImage: {fileID: 2744214801263480787}
+--- !u!1 &8814008947433916142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3995986479334809153}
+  m_Layer: 5
+  m_Name: GameOver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3995986479334809153
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814008947433916142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2744214802163487479}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.5, y: 0}
+  m_SizeDelta: {x: -1821, y: -980}
+  m_Pivot: {x: 0.5, y: 0.5}

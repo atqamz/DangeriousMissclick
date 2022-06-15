@@ -39,4 +39,13 @@ public class AudioPlayer : MonoBehaviour
   {
     PlayClip(dying, dyingVolume);
   }
+
+  [Header("Click")]
+  [SerializeField] AudioClip click;
+  [SerializeField][Range(0f, 1f)] float clickVolume = 0.5f;
+
+  public void PlayClickClip()
+  {
+    PlayClip(click, clickVolume);
+  }
 }
