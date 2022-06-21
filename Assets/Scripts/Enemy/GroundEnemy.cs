@@ -7,14 +7,17 @@ public class GroundEnemy : MonoBehaviour
   [SerializeField] float enemySpeed = 5f;
   [SerializeField] float enemyDamage = 1f;
   [SerializeField] float enemyHealth = 15f;
+  [SerializeField] ParticleSystem hitFX;
 
   Transform enemyTarget;
   Rigidbody2D enemyRb;
 
+  CameraShake cameraShake;
   AudioPlayer audioPlayer;
 
   void Awake()
   {
+    cameraShake = Camera.main.GetComponent<CameraShake>();
     enemyRb = GetComponent<Rigidbody2D>();
     GameObject player = GameObject.FindGameObjectWithTag("Player");
     enemyTarget = player.transform;
@@ -38,14 +41,17 @@ public class GroundEnemy : MonoBehaviour
     if (other.CompareTag("Player"))
     {
       other.GetComponent<Health>().TakeDamage(enemyDamage);
+      ShakeCamera();
       Destroy(gameObject);
     }
     else if (other.CompareTag("Bullet"))
     {
       enemyHealth -= other.GetComponent<Bullet>().bulletDamage;
+      PlayHitFX();
       audioPlayer.PlayHittingClip();
       if (enemyHealth <= 0)
       {
+        PlayHitFX();
         Destroy(gameObject);
       }
     }
@@ -60,5 +66,22 @@ public class GroundEnemy : MonoBehaviour
   {
     transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
     enemySpeed *= -1;
+  }
+
+  void ShakeCamera()
+  {
+    if (cameraShake != null)
+    {
+      cameraShake.Play();
+    }
+  }
+
+  void PlayHitFX()
+  {
+    if (hitFX != null)
+    {
+      ParticleSystem fx = Instantiate(hitFX, transform.position, Quaternion.identity, transform);
+      Destroy(fx.gameObject, fx.main.duration + fx.main.startLifetime.constantMax);
+    }
   }
 }

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
-  [SerializeField] GameObject bulletPrefab;
+  public GameObject bulletPrefab;
   [SerializeField] Transform bulletDir;
   AudioPlayer audioPlayer;
   Camera mainCam;

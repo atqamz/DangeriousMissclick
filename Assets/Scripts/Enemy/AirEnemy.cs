@@ -7,14 +7,18 @@ public class AirEnemy : MonoBehaviour
   [SerializeField] float enemySpeed = 5f;
   [SerializeField] float enemyDamage = 1f;
   [SerializeField] float enemyHealth = 15f;
+  [SerializeField] ParticleSystem hitFX;
+
   Transform enemyTarget;
   Rigidbody2D enemyRb;
   Vector2 enemyDir;
 
+  CameraShake cameraShake;
   AudioPlayer audioPlayer;
 
   void Awake()
   {
+    cameraShake = Camera.main.GetComponent<CameraShake>();
     enemyRb = GetComponent<Rigidbody2D>();
     GameObject player = GameObject.FindGameObjectWithTag("Player");
     enemyTarget = player.transform;
@@ -49,14 +53,17 @@ public class AirEnemy : MonoBehaviour
     if (other.CompareTag("Player"))
     {
       other.GetComponent<Health>().TakeDamage(enemyDamage);
+      ShakeCamera();
       Destroy(gameObject);
     }
     else if (other.CompareTag("Bullet"))
     {
       enemyHealth -= other.GetComponent<Bullet>().bulletDamage;
+      PlayHitFX();
       audioPlayer.PlayHittingClip();
       if (enemyHealth <= 0)
       {
+        PlayHitFX();
         Destroy(gameObject);
       }
     }
@@ -70,5 +77,22 @@ public class AirEnemy : MonoBehaviour
   void Flip()
   {
     transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y * -1);
+  }
+
+  void ShakeCamera()
+  {
+    if (cameraShake != null)
+    {
+      cameraShake.Play();
+    }
+  }
+
+  void PlayHitFX()
+  {
+    if (hitFX != null)
+    {
+      ParticleSystem instance = Instantiate(hitFX, transform.position, Quaternion.identity, transform);
+      Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
+    }
   }
 }

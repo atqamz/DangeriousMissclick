@@ -49,6 +49,7 @@ MonoBehaviour:
   enemySpeed: 5
   enemyDamage: 1
   enemyHealth: 15
+  hitFX: {fileID: 6057848564542174023, guid: c4389963ff3e931458eff418e2fa05a2, type: 3}
 --- !u!50 &4738852491384073547
 Rigidbody2D:
   serializedVersion: 4

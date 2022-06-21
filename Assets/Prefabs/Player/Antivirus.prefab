@@ -385,7 +385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3272069929272838704, guid: 18b0f1c5538feeb42be674114661261a, type: 3}
   bulletDir: {fileID: 8535085164172747986}
-  playerFireRate: 0.25
+  playerFireRate: 0.3
 --- !u!114 &3194838657655317323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
+  dead: 0
 --- !u!1 &3194838658712751554
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +515,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5.4
+  m_Radius: 5.2
 --- !u!114 &1079477534
 MonoBehaviour:
   m_ObjectHideFlags: 0

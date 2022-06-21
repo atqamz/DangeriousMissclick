@@ -19,6 +19,8 @@ public class Spawner : MonoBehaviour
   [SerializeField] Transform[] spawnGroundPoint;
   [SerializeField] Transform[] spawnAirPoint;
 
+  GameObject abilityHolder;
+
   SceneController sceneController;
 
   Wave currentWave;
@@ -29,6 +31,7 @@ public class Spawner : MonoBehaviour
   void Awake()
   {
     sceneController = FindObjectOfType<SceneController>();
+    abilityHolder = FindObjectOfType<AbilityHolder>().gameObject;
   }
 
   void FixedUpdate()
@@ -72,6 +75,7 @@ public class Spawner : MonoBehaviour
       if (currentWave.count == 0)
       {
         canSpawn = false;
+        abilityHolder.GetComponent<AbilityHolder>().enabled = true;
       }
     }
   }
